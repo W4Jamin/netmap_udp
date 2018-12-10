@@ -15,14 +15,12 @@ int main()
 {
     int sockfd;
     struct sockaddr_in server_addr;
-    //创建原始套接字
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    //创建套接字地址
     bzero(&server_addr,sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(8686);
-    server_addr.sin_addr.s_addr = inet_addr("10.0.2.15");
-    char sendline[10]="adcde";
+    server_addr.sin_port = htons(8686); // port
+    server_addr.sin_addr.s_addr = inet_addr(INADDR_ANY); // IP
+    char sendline[10]="hello world"; // 
     while(1)
     {
         sendto(sockfd, sendline, strlen(sendline), 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
